@@ -1,0 +1,191 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap");
+
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #080710;
+  font-family: "Poppins", sans-serif;
+}
+
+.background {
+  width: 430px;
+  height: 520px;
+  position: fixed; /* fix lại để không bị dịch khi scroll */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* tránh che mất form */
+  z-index: 0;
+}
+
+.background .shape {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.7;
+}
+
+.shape:first-child {
+  background: linear-gradient(135deg, #1845ad, #23a2f6);
+  left: -80px;
+  top: -80px;
+}
+
+.shape:last-child {
+  background: linear-gradient(135deg, #ff512f, #f09819);
+  right: -30px;
+  bottom: -80px;
+}
+
+form {
+  position: fixed; /* fix để lúc scroll không bị dịch */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90vw;
+  background-color: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  padding: 50px 35px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  color: #fff;
+  z-index: 10;
+}
+
+form h3 {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  height: 45px;
+  margin-top: 8px;
+  padding: 0 12px;
+  font-size: 15px;
+  font-weight: 300;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+input::placeholder {
+  color: #d1d1d1;
+}
+
+input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+
+button {
+  margin-top: 45px;
+  width: 100%;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #080710;
+  background-color: #ffffff;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #23a2f6;
+  color: #fff;
+}
+
+p {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #f5f5f5;
+}
+
+.auth-switch {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.auth-switch a {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Social login container */
+.social {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social div {
+  flex: 1;
+  max-width: 150px;
+  background-color: rgba(255, 255, 255, 0.27);
+  border-radius: 7px;
+  padding: 8px 10px;
+  color: #eaf0fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.social div:hover {
+  background-color: rgba(255, 255, 255, 0.47);
+}
+
+/* Google icon style */
+.social .go i {
+  font-size: 20px;
+  margin-right: 8px;
+  color: #db4437;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  form {
+    width: 95vw;
+    padding: 40px 25px;
+  }
+
+  .background {
+    display: none; /* ẩn background shapes trên mobile */
+  }
+}
+

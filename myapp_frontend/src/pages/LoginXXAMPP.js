@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Auth.css";
-import { Link } from "react-router-dom";
+import "../assets/css/Auth.css";
+import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { useEffect } from "react";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [user, setUser] = useState(null); // lưu info user Google
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,6 +23,9 @@ export default function Login() {
         }
       );
       setMessage(res.data.message);
+       if (res.data.success) { // giả sử backend trả về success
+      navigate("/home");
+    }
     } catch (err) {
       setMessage("Lỗi kết nối server");
     }
@@ -44,9 +48,9 @@ export default function Login() {
         }
       );
       setMessage(res.data.message);
-      // giả sử backend trả về info user trong res.data.user
       setUser(res.data.user || { name: "Google User" });
       setMessage("Đăng nhập thành công");
+      navigate("/home");
     } catch (error) {
       setMessage("Lỗi kết nối server");
     }
@@ -57,13 +61,13 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div className="auth-page">
       <div className="background">
         <div className="shape"></div>
         <div className="shape"></div>
       </div>
       <form onSubmit={handleLogin}>
-        <h3>Login Here</h3>
+        <h3>Login</h3>
 
         {user ? (
           <p>Xin chào, {user.name}</p>
@@ -89,7 +93,7 @@ export default function Login() {
               required
             />
 
-            <button type="submit">Log In</button>
+            <button type="submit">Login</button>
           </>
         )}
 
@@ -107,6 +111,6 @@ export default function Login() {
           </>
         )}
       </form>
-    </>
+    </div>
   );
 }

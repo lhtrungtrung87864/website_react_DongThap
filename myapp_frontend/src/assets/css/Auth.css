@@ -1,31 +1,28 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap");
 
-*,
-*:before,
-*:after {
+.auth-page *,
+.auth-page *:before,
+.auth-page *:after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #080710;
-  font-family: "Poppins", sans-serif;
-}
 
-.background {
+
+.auth-page .background {
   width: 430px;
   height: 520px;
-  position: fixed; /* fix lại để không bị dịch khi scroll */
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none; /* tránh che mất form */
+  pointer-events: none;
   z-index: 0;
 }
 
-.background .shape {
+.auth-page .background .shape {
   width: 200px;
   height: 200px;
   position: absolute;
@@ -34,131 +31,134 @@ body {
   opacity: 0.7;
 }
 
-.shape:first-child {
+.auth-page .shape:first-child {
   background: linear-gradient(135deg, #1845ad, #23a2f6);
   left: -80px;
   top: -80px;
 }
 
-.shape:last-child {
+.auth-page .shape:last-child {
   background: linear-gradient(135deg, #ff512f, #f09819);
   right: -30px;
   bottom: -80px;
 }
 
-form {
-  position: fixed; /* fix để lúc scroll không bị dịch */
+.auth-page form {
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
   max-width: 90vw;
-  background-color: rgba(255, 255, 255, 0.13);
+  background-color: rgba(35, 162, 246, 0.3); /* nền xanh nhẹ mờ */
   border-radius: 10px;
   padding: 50px 35px;
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  color: #fff;
+
   z-index: 10;
+  background-color: rgba(48, 159, 228, 0.8); /* xanh đậm hơn, trong suốt vừa phải */
+  color: #0b0b0b;
 }
 
-form h3 {
+.auth-page form h3 {
   font-size: 32px;
   font-weight: 600;
   text-align: center;
   margin-bottom: 20px;
+  color: #ffe0ea;
 }
 
-label {
+.auth-page label {
   display: block;
   margin-top: 25px;
   font-size: 16px;
   font-weight: 500;
+  color: #1c1f22;
 }
 
-input {
+.auth-page input {
   width: 100%;
   height: 45px;
   margin-top: 8px;
   padding: 0 12px;
   font-size: 15px;
   font-weight: 300;
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(227, 224, 224, 0.15);
   border-radius: 5px;
-  color: #fff;
+  color: #0f1112; /* chữ trong input màu xanh đậm */
   border: none;
   transition: background-color 0.3s ease;
 }
 
-input::placeholder {
-  color: #d1d1d1;
+.auth-page input::placeholder {
+  color: #6688aa; /* màu placeholder tối hơn */
 }
 
-input:focus {
-  background-color: rgba(255, 255, 255, 0.15);
+.auth-page input:focus {
+  background-color: rgba(255, 255, 255, 0.3);
   outline: none;
 }
 
-button {
+.auth-page button {
   margin-top: 45px;
   width: 100%;
   padding: 14px 0;
   font-size: 18px;
   font-weight: 600;
-  color: #080710;
-  background-color: #ffffff;
+  color: #001f3f; /* chữ nút màu xanh đậm */
+  background-color: #4f46d2;
   border-radius: 7px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #23a2f6;
+.auth-page button:hover {
+  background-color: #1461bf;
   color: #fff;
 }
 
-p {
+.auth-page p {
   text-align: center;
   margin-top: 15px;
   font-weight: 500;
   font-size: 14px;
-  color: #f5f5f5;
+  color: #cde6ff;
 }
 
-.auth-switch {
+.auth-page .auth-switch {
   margin-top: 15px;
   text-align: center;
   font-size: 14px;
-  color: #ddd;
+  color: #a8c6ff;
 }
 
-.auth-switch a {
-  color: #4a90e2;
+.auth-page .auth-switch a {
+  color: #aabdcf; /* trắng sáng hơn, dễ đọc */
   text-decoration: none;
   font-weight: 600;
 }
 
-.auth-switch a:hover {
+.auth-page .auth-switch a:hover {
   text-decoration: underline;
 }
 
-/* Social login container */
-.social {
+.auth-page .social {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 15px;
 }
 
-.social div {
+.auth-page .social div {
   flex: 1;
   max-width: 150px;
   background-color: rgba(255, 255, 255, 0.27);
   border-radius: 7px;
   padding: 8px 10px;
-  color: #eaf0fb;
+  color: #afbace;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -166,26 +166,23 @@ p {
   transition: background-color 0.3s ease;
 }
 
-.social div:hover {
-  background-color: rgba(255, 255, 255, 0.47);
+.auth-page .social div:hover {
+  background-color: rgba(190, 47, 47, 0.47);
 }
 
-/* Google icon style */
-.social .go i {
+.auth-page .social .go i {
   font-size: 20px;
   margin-right: 8px;
   color: #db4437;
 }
 
-/* Responsive */
 @media (max-width: 480px) {
-  form {
+  .auth-page form {
     width: 95vw;
     padding: 40px 25px;
   }
 
-  .background {
-    display: none; /* ẩn background shapes trên mobile */
+  .auth-page .background {
+    display: none;
   }
 }
-

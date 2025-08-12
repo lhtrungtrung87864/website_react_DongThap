@@ -1,0 +1,77 @@
+header {
+  background-color: #a5a5efe2;
+  padding: 15px 30px;
+  color: #d31616;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(74, 71, 163, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 3 phần chính trong header */
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Phần trái và phải rộng vừa đủ nội dung */
+.nav-left ul,
+.nav-right ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+
+}
+
+/* Căn giữa phần tiêu đề và cho nó flex-grow để chiếm không gian giữa */
+.nav-center {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  margin-left: 250px;
+  margin-right: 330px;
+ 
+}
+
+/* Liên kết menu */
+nav ul li a {
+  color: rgb(36, 30, 30);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+  background-color: #a19ef3;
+  outline: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+
+  .nav-left ul,
+  .nav-right ul {
+    gap: 15px;
+  }
+
+  .nav-center {
+    margin: 0;
+  }
+}

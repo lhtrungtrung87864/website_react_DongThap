@@ -11,7 +11,7 @@ export default function Login() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const storedUsers = JSON.parse(localStorage.getItem("users"));
+    const storedUsers = JSON.parse(localStorage.getItem("user"));
     if (storedUsers && storedUsers.length > 0) {
       setUsers(storedUsers);
     } else {

@@ -8,12 +8,12 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
-  const [message, setMessage] = useState("");
+  
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const storedUsers = JSON.parse(localStorage.getItem("users"));
+    const storedUsers = JSON.parse(localStorage.getItem("user"));
     if (storedUsers && storedUsers.length > 0) {
       setUsers(storedUsers);
     } else {
@@ -27,15 +27,15 @@ export default function Register() {
 
     const exists = users.find((u) => u.username === username);
     if (exists) {
-      setMessage("Tài khoản đã tồn tại");
+      alert("Tài khoản đã tồn tại");
       return;
     }
 
     const newUser = { username, password, name, role };
     const updatedUsers = [...users, newUser];
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    localStorage.setItem("user", JSON.stringify(updatedUsers));
 
-    setMessage("Đăng ký thành công");
+    alert("Đăng ký thành công");
     navigate("/login");
   };
 
@@ -76,7 +76,7 @@ export default function Register() {
 
         <button type="submit">Register</button>
 
-        {message && <p>{message}</p>}
+        
 
         <div>
           Đã có tài khoản? <Link to="/login">Đăng nhập ngay</Link>

@@ -6,8 +6,8 @@
     "role": "admin"
   },
   {
-    "username": "test",
-    "password": "abc123",
+    "username": "trung",
+    "password": "123",
     "name": "Test User",
     "role": "user"
   }

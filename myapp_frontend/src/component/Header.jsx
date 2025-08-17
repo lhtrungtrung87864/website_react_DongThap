@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ user, handleLogout }) {
   return (
     <header>
       <nav className="nav-left">
@@ -17,8 +17,19 @@ function Header() {
 
       <nav className="nav-right">
         <ul>
-          <li><Link to="/login">Đăng nhập</Link></li>
-          <li><Link to="/register">Đăng ký</Link></li>
+          {user ? (
+            <>
+              <li><strong>Xin chào {user.name}</strong></li>
+              <li>
+                <button onClick={handleLogout}>Đăng xuất</button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li><Link to="/login">Đăng nhập</Link></li>
+              <li><Link to="/register">Đăng ký</Link></li>
+            </>
+          )}
         </ul>
       </nav>
     </header>

@@ -57,9 +57,9 @@ header {
   color: #fff;
 }
 
-/* Button logout */
+/* Button log */
 .nav-right button {
-  background: #e63946;
+  background: #3978e6;
   border: none;
   padding: 6px 12px;
   color: white;
@@ -89,4 +89,9 @@ header {
     flex-wrap: wrap;
     gap: 10px;
   }
+}
+
+.nav-right a.login-link {
+  color: #cb1414 !important;
+  font-weight: bold;
 }

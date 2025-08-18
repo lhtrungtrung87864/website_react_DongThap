@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import HomeAdmin from "./pages/admin/HomeAdmin";
 import HomeUser from "./pages/user/HomeUser";
@@ -11,24 +11,24 @@ import VanHoa from "./pages/user/Vanhoa_Lehoi";
 import LienHe from "./pages/user/Lienhe";
 import TinTuc from "./pages/user/Tintuc_Sukien";
 
-
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomeUser />} />
-      <Route path="/gioi-thieu" element={<GioiThieu />} />
-      <Route path="/dia-diem" element={<DiaDiem />} />
-      <Route path="/am-thuc" element={<AmThuc />} />
-  
-      <Route path="/van-hoa-le-hoi" element={<VanHoa />} />
-      <Route path="/tin-tuc-su-kien" element={<TinTuc />} />
-      <Route path="/lien-he" element={<LienHe />} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomeUser />} />
+        <Route path="/gioi-thieu" element={<GioiThieu />} />
+        <Route path="/dia-diem" element={<DiaDiem />} />
+        <Route path="/am-thuc" element={<AmThuc />} />
+        <Route path="/van-hoa-le-hoi" element={<VanHoa />} />
+        <Route path="/tin-tuc-su-kien" element={<TinTuc />} />
+        <Route path="/lien-he" element={<LienHe />} />
 
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    
-      <Route path="/homeadmin" element={<HomeAdmin />} />
-    </Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route path="/homeadmin" element={<HomeAdmin />} />
+      </Routes>
+    </Router>
   );
 }
 

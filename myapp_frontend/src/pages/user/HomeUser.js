@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
+import "../../assets/css/Main.css";
+
+import Images from "../../assets/image/Dongthap.png";
+import ImagesTramchim from "../../assets/image/Tramchim.jpg";
+import ImagesNemlaivung from "../../assets/image/Nemlaivung.jpg";
+import ImagesChieudinhyen from "../../assets/image/Chieudinhyen.jpg";
 
 export default function HomeUser() {
   const navigate = useNavigate();
@@ -12,111 +18,237 @@ export default function HomeUser() {
     if (loggedUser && loggedUser.role === "user") {
       setUser(loggedUser);
     } else {
-      navigate("/login");
+      // navigate("/login");
+      setUser(null); // ❌ Không điều hướng, chỉ để user = null
     }
   }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
-    navigate("/login");
+    // navigate("/login");
+    setUser(null); // reset lại user về null
+    navigate("/"); // đưa về trang chủ sau khi logout
   };
 
   return (
     <div>
-      {user && (
-        <>
-          <Header user={user} handleLogout={handleLogout} />
+      <>
+        <Header user={user} handleLogout={handleLogout} />
 
-          <main style={{ marginTop: "20px" }}>
-            {/* Banner hình ảnh */}
-            <section
-              id="banner"
-              style={{ textAlign: "center", marginBottom: "40px" }}
-            >
-              <img
-                src=""
-                alt="Cảnh đẹp Đồng Tháp"
-                style={{
-                  width: "100%",
-                  maxHeight: "400px",
-                  objectFit: "cover",
-                  borderRadius: "12px",
-                }}
-              />
-            </section>
+        <main>
+          {/* Banner hình ảnh */}
+          <section
+            id="banner"
+            style={{ textAlign: "center", marginBottom: "40px" }}
+          >
+            <img src={Images} alt="Cảnh đẹp Đồng Tháp" />
+          </section>
 
-            {/* Giới thiệu ngắn gọn */}
-            <section id="gioi-thieu" style={{ marginBottom: "40px" }}>
-              <h2
-                style={{
-                  fontSize: "24px",
-                  marginBottom: "10px",
-                  textAlign: "center",
-                }}
-              >
-                Giới thiệu về tỉnh Đồng Tháp
-              </h2>
-              <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-                <div style={{ flex: 1, minWidth: "250px" }}>
-                  <h3>Trước sáp nhập tỉnh</h3>
-                  <p>
-                    Đồng Tháp trước đây gồm hai tỉnh: Sa Đéc và Kiến Phong. Đây
-                    là vùng đất giàu truyền thống lịch sử, gắn với sông Tiền và
-                    những làng nghề truyền thống.
-                  </p>
-                </div>
-                <div style={{ flex: 1, minWidth: "250px" }}>
-                  <h3>Sau sáp nhập tỉnh</h3>
-                  <p>
-                    Năm 1976, hai tỉnh Sa Đéc và Kiến Phong sáp nhập thành Đồng
-                    Tháp. Hiện nay, tỉnh nổi tiếng với những cánh đồng sen, làng
-                    hoa Sa Đéc, và nhiều khu du lịch sinh thái sông nước.
-                  </p>
-                </div>
+          {/* Giới thiệu ngắn gọn */}
+          <section id="gioi-thieu">
+            <h2>Giới thiệu về tỉnh Đồng Tháp</h2>
+            <div>
+              <div>
+                <h3>Trước sáp nhập tỉnh</h3>
+                <p>
+                  Tỉnh Đồng Tháp là một trong những địa phương thuộc vùng Đồng
+                  bằng sông Cửu Long, miền Tây Nam Bộ, Việt Nam.
+                </p>
+
+                <p>
+                  Trước khi thực hiện việc sắp xếp đơn vị hành chính, tỉnh Đồng
+                  Tháp có 12 đơn vị hành chính cấp huyện, bao gồm 3 thành phố và
+                  9 huyện.
+                </p>
+
+                <p>
+                  <strong>Đơn vị hành chính cấp huyện:</strong>
+                </p>
+
+                <p>
+                  <strong>Thành phố Cao Lãnh:</strong> Được
+                  thành lập vào năm 2007 và đạt đô thị loại II vào năm 2020.
+                  Thành phố có diện tích 107 km² và dân số khoảng 164.835 người.
+                </p>
+
+                <p>
+                  <strong>Thành phố Sa Đéc:</strong> Được công nhận là thành phố
+                  trực thuộc tỉnh vào năm 2013 và đạt đô thị loại II vào năm
+                  2018. Thành phố có diện tích 118 km² và dân số khoảng 135.000
+                  người.
+                </p>
+
+                <p>
+                  <strong>Thành phố Hồng Ngự:</strong> Được công nhận là thành
+                  phố trực thuộc tỉnh vào năm 2020. Thành phố có diện tích
+                  121,84 km² và dân số khoảng 76.462 người.
+                </p>
+
+                <p>
+                  <strong>Huyện Cao Lãnh:</strong> Có diện tích lớn và dân số
+                  đông nhất trong tỉnh.
+                </p>
+
+                <p>
+                  <strong>Huyện Châu Thành:</strong> Nổi bật với các làng nghề
+                  truyền thống.
+                </p>
+
+                <p>
+                  <strong>Huyện Lai Vung:</strong> Nổi tiếng với đặc sản quýt
+                  hồng.
+                </p>
+
+                <p>
+                  <strong>Huyện Lấp Vò:</strong> Có nhiều di tích lịch sử và văn
+                  hóa.
+                </p>
+
+                <p>
+                  <strong>Huyện Tam Nông:</strong> Được biết đến với khu du lịch
+                  sinh thái Gáo Giồng.
+                </p>
+
+                <p>
+                  <strong>Huyện Tân Hồng:</strong> Giáp với biên giới Campuchia,
+                  có nhiều nét văn hóa đặc sắc.
+                </p>
+
+                <p>
+                  <strong>Huyện Thanh Bình:</strong> Nổi bật với nghề trồng lúa
+                  và thủy sản.
+                </p>
+
+                <p>
+                  <strong>Huyện Tháp Mười:</strong> Có nhiều di tích lịch sử và
+                  cảnh quan thiên nhiên đẹp.
+                </p>
+
+                <p>
+                  <strong>Huyện Hồng Ngự:</strong> Giáp với biên giới Campuchia,
+                  có nhiều nét văn hóa đặc sắc.
+                </p>
+
+                <p>
+                  <strong>Kinh tế và văn hóa:</strong> Trước khi sáp nhập, Đồng
+                  Tháp là tỉnh có nền kinh tế chủ yếu dựa vào nông nghiệp, với
+                  sản phẩm chủ lực là lúa gạo, thủy sản và cây ăn trái. Tỉnh
+                  cũng nổi tiếng với các làng nghề truyền thống, như làng nghề
+                  làm nem, làng nghề đan lát, và các sản phẩm thủ công mỹ nghệ.
+                </p>
+
+                <p>
+                  Văn hóa Đồng Tháp phong phú với nhiều lễ hội dân gian, như lễ
+                  hội đua bò, lễ hội Sen Đồng Tháp, và các làn điệu dân ca Nam
+                  Bộ. Người dân nơi đây hiền hòa, mến khách, và luôn giữ gìn
+                  những giá trị văn hóa truyền thống.
+                </p>
               </div>
-            </section>
+              <div>
+                <h3>Sau sáp nhập tỉnh</h3>
+                <p>
+                  <strong>Hành chính – Địa giới</strong>
+                </p>
+                
+                <p>
+                  <strong>Ngày sáp nhập:</strong> 1/7/2025, theo Nghị quyết số
+                  1663/NQ-UBTVQH15 của Ủy ban Thường vụ Quốc hội.
+                </p>
+                <p>
+                  <strong>Tên gọi mới:</strong> Tỉnh Đồng Tháp (giữ nguyên tên
+                  cũ để bảo tồn thương hiệu và thuận tiện trong giao dịch hành
+                  chính).
+                </p>
+                <p>
+                  <strong>Đơn vị hành chính cấp xã:</strong> Sau sáp nhập, tỉnh
+                  Đồng Tháp có tổng cộng 102 đơn vị hành chính cấp xã, bao gồm
+                  82 xã và 20 phường.
+                </p>
 
-            {/* Các mục nổi bật */}
-            <section id="noi-bat" style={{ marginBottom: "40px" }}>
-              <h2
-                style={{
-                  fontSize: "24px",
-                  textAlign: "center",
-                  marginBottom: "20px",
-                }}
-              >
-                Các mục nổi bật
-              </h2>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                  gap: "20px",
-                }}
-              >
-                <div className="card">
-                  <img src="" alt="Du lịch" className="animate-img" />
-                  <h3>Du lịch</h3>
-                </div>
-                <div className="card">
-                  <img src="" alt="Ẩm thực" className="animate-img" />
-                  <h3>Ẩm thực</h3>
-                </div>
-                <div className="card">
-                  <img src="" alt="Đặc sản" className="animate-img" />
-                  <h3>Đặc sản</h3>
-                </div>
-                <div className="card">
-                  <img src="" alt="Văn hóa" className="animate-img" />
-                  <h3>Văn hóa</h3>
-                </div>
+                <p>
+                  <strong>Trung tâm hành chính</strong>
+                </p>
+                <p>
+                  <strong>Trụ sở chính quyền tỉnh:</strong> Đặt tại phường Mỹ
+                  Tho, tỉnh Tiền Giang (nay thuộc tỉnh Đồng Tháp mới).
+                </p>
+
+                <p>
+                  <strong>Vận hành chính quyền địa phương:</strong> Từ ngày 1/7/2025, 
+                  chính quyền hai cấp tỉnh Đồng Tháp và Tiền Giang bắt đầu vận hành theo mô hình mới.
+                </p>
+
+                <p>
+                  <strong>Kinh tế và phát triển nông nghiệp</strong>
+                </p>
+                <p>
+                  <strong>Mục tiêu chiến lược:</strong> Phát triển mô hình "tam
+                  nông" hiện đại, bao gồm nông nghiệp, nông dân và nông thôn.
+                </p>
+                <p>
+                  <strong>Điểm mạnh:</strong> Đồng Tháp tiếp tục duy trì vị thế
+                  là trung tâm sản xuất nông sản lớn của Đồng bằng sông Cửu
+                  Long, với các sản phẩm chủ lực như lúa gạo, thủy sản và trái
+                  cây.
+                </p>
+
+                <p>
+                  <strong>Cải cách hành chính</strong>
+                </p>
+                <p>
+                  <strong>Sắp xếp đơn vị hành chính cấp xã:</strong> Theo Nghị
+                  quyết số 1663/NQ-UBTVQH15, tỉnh Đồng Tháp đã thực hiện sắp xếp
+                  lại các đơn vị hành chính cấp xã để tinh gọn bộ máy và nâng
+                  cao hiệu quả quản lý.
+                </p>
+
+                <p>
+                  <strong>Lý do sáp nhập</strong>
+                </p>
+                <p>
+                  <strong>Mục tiêu:</strong> Nâng cao hiệu lực, hiệu quả quản lý
+                  nhà nước, mở rộng không gian phát triển và kết nối vùng Đồng
+                  bằng sông Cửu Long với vùng kinh tế trọng điểm Đông Nam Bộ.
+                </p>
               </div>
-            </section>
-          </main>
+            </div>
+          </section>
 
-          <Footer />
-        </>
-      )}
+          {/* Các mục nổi bật */}
+          <section id="noi-bat">
+            <h2>Các mục nổi bật</h2>
+            <div>
+              <div className="card">
+                <img
+                  src={ImagesTramchim}
+                  alt="Du lịch"
+                  className="animate-img"
+                />
+                <h3>Du lịch</h3>
+              </div>
+
+              <div className="card">
+                <img
+                  src={ImagesNemlaivung}
+                  alt="Đặc sản"
+                  className="animate-img"
+                />
+                <h3>Ẩm thực & Đặc sản</h3>
+              </div>
+              <div className="card">
+                <img
+                  src={ImagesChieudinhyen}
+                  alt="Văn hóa"
+                  className="animate-img"
+                />
+                <h3>Văn hóa & Lễ hội</h3>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+      </>
     </div>
   );
 }

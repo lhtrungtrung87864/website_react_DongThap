@@ -155,11 +155,12 @@ function Header({ user, handleLogout }) {
               <li><strong>Xin chào {user.name}</strong></li>
               <li>
                 <button onClick={handleLogout}>Đăng xuất</button>
+                
               </li>
             </>
           ) : (
             <>
-              <li><Link to="/login">Đăng nhập</Link></li>
+              <li><Link to="/login" className="login-link">Đăng nhập</Link></li>
             </>
           )}
         </ul>

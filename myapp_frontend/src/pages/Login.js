@@ -34,7 +34,7 @@ export default function Login() {
       if (foundUser.role === "admin") {
         navigate("/homeadmin");
       } else {
-        navigate("/homeuser");
+        navigate("/");
       }
     } else {
       setMessage("Sai tài khoản hoặc mật khẩu");

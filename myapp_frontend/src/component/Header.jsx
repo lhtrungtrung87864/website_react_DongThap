@@ -6,6 +6,7 @@ import "../assets/css/Header.css";
 
 function Header({ user, handleLogout }) {
   // const [openDropdown, setOpenDropdown] = useState(null);
+  
 
   return (
     <header>

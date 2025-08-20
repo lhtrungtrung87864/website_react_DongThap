@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
+import Marquee from "../../component/Marquee";
 import "../../assets/css/HomeUser.css";
 import Search from "../../component/Search";
 import newsData from "../../data/news.json";
@@ -119,21 +120,9 @@ export default function HomeUser() {
 
         <main className="home-main">
           {/* Dòng chữ chạy */}
-          <div class="marquee-container">
-            <div class="marquee-track">
-              <span>
-                Góp ý dự thảo văn kiện trình Ðại hội đại biểu Ðảng bộ tỉnh lần
-                thứ I, nhiệm kỳ 2025 – 2030
-              </span>
-              <span>
-                Tuổi trẻ Đồng Tháp kết nối tri thức - chuyển đổi số - phát triển
-                xanh và bền vững
-              </span>
-              <span>
-                Đồng Tháp đẩy mạnh phát triển nông nghiệp xanh, bền vững
-              </span>
-            </div>
-          </div>
+          
+               <Marquee />
+         
 
           <div className="content-wrapper">
             {/* Slideshow ảnh */}

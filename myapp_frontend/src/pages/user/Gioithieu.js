@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
+import "../../assets/css/Gioithieus.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
-import "../../assets/css/Main.css";
+import newsData from "../../data/news.json";
+import Search from "../../component/Search";
+
+import ImageDong from "../../component/ImagesDong"
 
 import Images from "../../assets/image/Dongthap.png";
-import ImagesTramchim from "../../assets/image/Tramchim.jpg";
-import ImagesNemlaivung from "../../assets/image/Nemlaivung.jpg";
-import ImagesChieudinhyen from "../../assets/image/Chieudinhyen.jpg";
 
-export default function HomeUser() {
+
+export default function GioiThieu() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+   const [results, setResults] = useState([]);
+     const [news] = useState(newsData);
+  
+    const handleSearch = (keyword) => {
+    const filtered = news.filter((item) =>
+      item.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setResults(filtered);
+  };
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -39,9 +50,25 @@ export default function HomeUser() {
           {/* Banner hình ảnh */}
           <section
             id="banner"
-            style={{ textAlign: "center", marginBottom: "40px" }}
+           
           >
             <img src={Images} alt="Cảnh đẹp Đồng Tháp" />
+            {/* Ô tìm kiếm */}
+                      <Search news={news} onSearch={handleSearch} />
+                      {/* Hiển thị kết quả tìm kiếm */}
+                      {results.length > 0 && (
+                        <div className="search-results">
+                          <h3>Kết quả tìm kiếm:</h3>
+                          <ul>
+                            {results.map((r, idx) => (
+                              <li key={idx}>
+                                {/* render HTML trong chuỗi */}
+                                <span dangerouslySetInnerHTML={{ __html: r }} />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
           </section>
 
           {/* Giới thiệu ngắn gọn */}
@@ -220,7 +247,7 @@ export default function HomeUser() {
             <div>
               <div className="card">
                 <img
-                  src={ImagesTramchim}
+                  src="https://dulichvietnam.com.vn/kinh-nghiem/wp-content/uploads/2019/04/kinh-nghiem-du-lich-vuon-quoc-gia-tram-chim-2-696x391.jpg"
                   alt="Du lịch"
                   className="animate-img"
                 />
@@ -229,7 +256,7 @@ export default function HomeUser() {
 
               <div className="card">
                 <img
-                  src={ImagesNemlaivung}
+                  src="https://tuilanguoimientay.vn/wp-content/uploads/2022/06/nem-lai-vung-1-1.jpg"
                   alt="Đặc sản"
                   className="animate-img"
                 />
@@ -237,7 +264,7 @@ export default function HomeUser() {
               </div>
               <div className="card">
                 <img
-                  src={ImagesChieudinhyen}
+                  src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/472188aEm/lang-chieu-dinh-yen-bi-mat-cua-ngoi-lang-nghe-100-tuoi_9"
                   alt="Văn hóa"
                   className="animate-img"
                 />
@@ -247,6 +274,7 @@ export default function HomeUser() {
           </section>
         </main>
 
+        <ImageDong />
         <Footer />
       </>
     </div>

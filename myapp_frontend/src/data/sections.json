@@ -3,7 +3,7 @@
     "title": "Ẩm thực - Đặc sản",
     "articles": [
       {
-        "img": 1,
+        "img": "https://tuilanguoimientay.vn/wp-content/uploads/2022/06/nem-lai-vung-1-1.jpg",
         "imgLink": "/nemlaivung",
         "main": {
           "text": "Nem Lai Vung – Di sản ẩm thực Đồng Tháp",
@@ -26,7 +26,7 @@
     "title": "Văn hoá - Lễ hội",
     "articles": [
       {
-        "img": 0,
+        "img": "https://dongthap.gov.vn/documents/34223/0/dinh+dinh+yen.jpg/8cfe4a0d-334f-1344-24b1-3b5824799ba9?t=1618397257068",
         "imgLink": "/le-hoi-ky-yen",
         "main": {
           "text": "Lễ hội Kỳ Yên Đình thần Định Yên",
@@ -49,7 +49,7 @@
     "title": "Tin tức - Sự kiện",
     "articles": [
       {
-        "img": 2,
+        "img": "https://mediabls.mediatech.vn/upload/image/202508/medium/581652_4dda336a55e578fb986dda1b8d1b10a1.jpg",
         "imgLink": "/tin-noi-bat",
         "main": {
           "text": "Tin nổi bật về Đồng Tháp",

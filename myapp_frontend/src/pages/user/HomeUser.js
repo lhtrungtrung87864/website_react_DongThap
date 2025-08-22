@@ -7,14 +7,10 @@ import "../../assets/css/HomeUser.css";
 import Search from "../../component/Search";
 import newsData from "../../data/news.json";
 import Sections from "../../data/sections.json";
+import ImagesDong from "../../component/ImagesDong";
+import DiaDiem from "../../data/Diadiem.json";
 
 import Images from "../../assets/image/Dongthap.png";
-import NemLaiVung from "../../assets/image/Nemlaivung.jpg";
-import LeHoi from "../../assets/image/Lehoi_Dinhyen.jpg";
-import CauGachMieu from "../../assets/image/Caugachmieu.jpg";
-import GoThap from "../../assets/image/Gothap.jpg";
-import LangHoaSaDec from "../../assets/image/LanghoaSaDec.jpg";
-import NhaCoHuynhThuyLe from "../../assets/image/NhacoHuynhThuyLe.jpg";
 
 export default function HomeUser() {
   const navigate = useNavigate();
@@ -22,29 +18,17 @@ export default function HomeUser() {
   const [currentImage, setCurrentImage] = useState(0);
   // dữ liệu từ datanews.json
   const [news] = useState(newsData);
+  const places = DiaDiem; // chứa cả img + link
 
   const [results, setResults] = useState([]);
 
   const handleSearch = (keyword) => {
-  const filtered = news.filter((item) =>
-    item.title.toLowerCase().includes(keyword.toLowerCase())
-  );
-  setResults(filtered);
-};
+    const filtered = news.filter((item) =>
+      item.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+    setResults(filtered);
+  };
 
-
-  const [index, setIndex] = useState(0);
-  const images = [
-    LeHoi,
-    NemLaiVung,
-    CauGachMieu,
-    GoThap,
-    LangHoaSaDec,
-    NhaCoHuynhThuyLe,
-  ]; // mảng ảnh cố định
-  const groupSize = 5; // số ảnh hiển thị cùng lúc
-  const delay = 5000;
-  
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (loggedUser && loggedUser.role === "user") {
@@ -63,32 +47,23 @@ export default function HomeUser() {
   // Tự động đổi ảnh
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
+      setCurrentImage((prev) => (prev + 1) % places.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [places.length]);
 
   const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % images.length);
+    setCurrentImage((prev) => (prev + 1) % places.length);
   };
 
   const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImage((prev) => (prev - 1 + places.length) % places.length);
   };
 
-  //cuoi trang
+  const handleClick = () => {
+    navigate(places[currentImage].link);
+  };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) =>
-        prev + groupSize >= images.length ? 0 : prev + groupSize
-      );
-    }, delay);
-
-    return () => clearInterval(interval);
-  }, [images.length]);
-
-  const displayed = images.slice(index, index + groupSize);
   return (
     <div>
       <>
@@ -120,18 +95,20 @@ export default function HomeUser() {
 
         <main className="home-main">
           {/* Dòng chữ chạy */}
-          
-               <Marquee />
-         
+
+          <Marquee />
 
           <div className="content-wrapper">
             {/* Slideshow ảnh */}
             <div className="slideshow">
               <img
-                src={images[currentImage]}
-                alt="Slideshow"
+                src={places[currentImage].img}
+                alt={places[currentImage].title}
                 className="slideshow-img"
+                onClick={() => handleClick(places[currentImage].link)}
+                style={{ cursor: "pointer" }}
               />
+
               <button className="btn prev" onClick={prevImage}>
                 ❮
               </button>
@@ -153,47 +130,39 @@ export default function HomeUser() {
 
           {/* phóng sự */}
           <div className="news-sections">
-      {Sections.map((section, idx) => (
-        <div key={idx} className="news-block">
-          <h2 className="section-title">{section.title}</h2>
+            {Sections.map((section, idx) => (
+              <div key={idx} className="news-block">
+                <h2 className="section-title">{section.title}</h2>
 
-          {section.articles.map((article, index) => (
-            <div key={index}>
-              <a href={article.imgLink}>
-                <img
-                  src={images[article.img]}
-                  alt={article.main.text}
-                  className="news-img"
-                />
-              </a>
+                {section.articles.map((article, index) => (
+                  <div key={index}>
+                    <a href={article.imgLink}>
+                      <img
+                        src={article.img} // ❌ bỏ dấu ngoặc kép
+                        alt={article.main.text}
+                        className="news-img"
+                      />
+                    </a>
 
-              <h3 className="main-article">
-                <a href={article.main.link}>{article.main.text}</a>
-              </h3>
+                    <h3 className="main-article">
+                      <a href={article.main.link}>{article.main.text}</a>
+                    </h3>
 
-              <ul className="sub-articles">
-                {article.subs.map((s, i) => (
-                  <li key={i}>
-                    <a href={s.link}>{s.text}</a>
-                  </li>
+                    <ul className="sub-articles">
+                      {article.subs.map((s, i) => (
+                        <li key={i}>
+                          <a href={s.link}>{s.text}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      ))}
-    </div>
-
-
-          {/* cuoi trang */}
-          <div className="image-slider">
-            {displayed.map((img, i) => (
-              <div key={i} className="image-item">
-                <img src={img} alt={`Ảnh ${i}`} />
               </div>
             ))}
           </div>
         </main>
+        {/* cuoi trang */}
+        <ImagesDong />
 
         <Footer />
       </>

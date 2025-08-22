@@ -10,7 +10,7 @@ function Footer() {
 
         {/* Cột 1: Thông tin */}
         <div className="footer-col">
-          <h3>Đồng Tháp Travel</h3>
+          <h3>Đồng Tháp</h3>
           <p>Khám phá vẻ đẹp miền Tây sông nước</p>
           <p><strong>Địa chỉ:</strong> TP. Cao Lãnh, Đồng Tháp</p>
           <p><strong>Điện thoại:</strong> 0396945640</p>
@@ -42,7 +42,7 @@ function Footer() {
 
       {/* Bản quyền */}
       <div className="footer-bottom">
-        <p>© 2025 Đồng Tháp Travel. All rights reserved.</p>
+        <p>© 2025 Đồng Tháp. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -9,6 +9,7 @@ import newsData from "../../data/news.json";
 import Sections from "../../data/sections.json";
 import ImagesDong from "../../component/ImagesDong";
 import DiaDiem from "../../data/Diadiem.json";
+import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 
 import Images from "../../assets/image/Dongthap.png";
 
@@ -161,6 +162,8 @@ export default function HomeUser() {
             ))}
           </div>
         </main>
+         {/* ✅ Chat nổi góc phải */}
+              <FloatinggeminiChat />
         {/* cuoi trang */}
         <ImagesDong />
 

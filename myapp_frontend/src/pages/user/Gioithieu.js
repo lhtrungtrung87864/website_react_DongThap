@@ -5,7 +5,7 @@ import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import newsData from "../../data/news.json";
 import Search from "../../component/Search";
-
+import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 import ImageDong from "../../component/ImagesDong"
 
 import Images from "../../assets/image/Dongthap.png";
@@ -273,7 +273,8 @@ export default function GioiThieu() {
             </div>
           </section>
         </main>
-
+ {/* ✅ Chat nổi góc phải */}
+      <FloatinggeminiChat />
         <ImageDong />
         <Footer />
       </>

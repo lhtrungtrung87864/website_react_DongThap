@@ -5,6 +5,7 @@ import "../../assets/css/Diadiem.css";
 import DiaDiem from "../../data/Diadiem.json";
 import { useNavigate } from "react-router-dom";
 import ImagesDong from "../../component/ImagesDong"
+import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 
 
 export default function DiaDiems() {
@@ -50,6 +51,8 @@ export default function DiaDiems() {
           ))}
         </div>
       </section>
+       {/* ✅ Chat nổi góc phải */}
+      <FloatinggeminiChat />
       <ImagesDong />
       <Footer />
     </div>

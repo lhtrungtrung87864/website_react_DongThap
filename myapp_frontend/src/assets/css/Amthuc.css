@@ -61,3 +61,44 @@
   transform: scale(1.08);
 }
 
+/* Responsive cho tablet */
+@media (max-width: 768px) {
+  #am-thuc h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    width: 45%; /* 2 card trên 1 hàng */
+    margin-bottom: 20px;
+  }
+
+  .card-content h3 {
+    font-size: 18px;
+  }
+
+  .card-content p {
+    font-size: 13px;
+  }
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 480px) {
+  #am-thuc h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card {
+    width: 90%; /* 1 card trên 1 hàng */
+    margin: 0 auto 20px;
+  }
+
+  .card-content h3 {
+    font-size: 16px;
+  }
+
+  .card-content p {
+    font-size: 12px;
+  }
+}

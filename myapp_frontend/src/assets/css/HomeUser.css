@@ -6,10 +6,12 @@
 
 
 /* Layout chứa slideshow và danh sách tin */
+/* Desktop */
 .content-wrapper {
   display: flex;
   gap: 20px;
 }
+
 
 /* Slideshow */
 .slideshow {
@@ -190,5 +192,62 @@
   color: transparent;       /* để lộ gradient */
   font-weight: 800;
   margin: 16px 0;
+}
+
+
+/* Mobile nhỏ hơn 768px */
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column; /* xếp dọc */
+  }
+.slideshow, .news-list {
+    width: 100%; /* chiếm hết chiều ngang */
+  }
+
+  .news-sections {
+    grid-template-columns: 1fr; /* mỗi block 1 hàng */
+  }
+
+  .news-img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* Trên mobile nên giảm padding/margin để tiết kiệm không gian */
+@media (max-width: 768px) {
+  .home-main {
+    padding: 10px;
+  }
+
+  .news-list {
+    height: auto; /* không cố định chiều cao */
+    max-height: 400px; /* nếu muốn scroll */
+  }
+}
+
+/* Font size desktop hơi lớn, nên giảm trên mobile */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 18px;
+  }
+
+  .main-article {
+    font-size: 15px;
+  }
+
+  .sub-articles li {
+    font-size: 13px;
+  }
+}
+
+
+
+/* Nút .btn cần padding nhỏ hơn và font size nhỏ hơn trên mobile */
+@media (max-width: 768px) {
+  .btn {
+    padding: 6px 10px;
+    font-size: 16px;
+  }
 }
 

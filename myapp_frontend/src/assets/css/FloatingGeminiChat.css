@@ -123,3 +123,52 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+  .floating-btn {
+    right: 0.5rem;
+    top: 30%;
+  }
+
+  .floating-btn button {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+
+  .floating-chatbox {
+    width: 90vw; /* gần full màn hình */
+    height: 70vh; /* chiếm 70% chiều cao */
+    bottom: 0.5rem;
+    right: 0.5rem;
+    border-radius: 1rem 1rem 0 0; /* bo tròn trên */
+  }
+
+  .floating-chatbox .chat-header {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .floating-chatbox .chat-messages {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  .floating-chatbox .chat-input {
+    gap: 0.4rem;
+    padding: 0.4rem;
+  }
+
+  .floating-chatbox .chat-input input {
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+
+  .floating-chatbox .chat-input button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+}

@@ -83,3 +83,59 @@
   font-size: 14px;
   height: 20px;
 }
+
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-col {
+    min-width: 80%; /* chiếm gần hết chiều ngang */
+    height: auto;   /* co theo nội dung */
+    text-align: center;
+  }
+
+  .footer-col h3 {
+    font-size: 16px;
+  }
+
+  .footer-col ul li a {
+    font-size: 13px;
+  }
+
+  .socials {
+    justify-content: center;
+    gap: 12px;
+    font-size: 24px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    height: auto;
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-col {
+    min-width: 100%;
+    margin: 5px 0;
+  }
+
+  .footer-col h3 {
+    font-size: 14px;
+  }
+
+  .footer-col ul li a {
+    font-size: 12px;
+  }
+
+  .socials {
+    font-size: 20px;
+    gap: 10px;
+  }
+}

@@ -13,7 +13,7 @@ import TinTuc from "./pages/user/Tintuc_Sukien";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/website_react_DongThap">
       <Routes>
         <Route path="/" element={<HomeUser />} />
         <Route path="/gioi-thieu" element={<GioiThieu />} />

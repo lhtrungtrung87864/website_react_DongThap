@@ -93,3 +93,41 @@
 .card:hover img {
   transform: scale(1.08);
 }
+
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  #gioi-thieu > div > div {
+    flex: 1 1 100%; /* mỗi block chiếm full width */
+    padding: 15px;
+  }
+
+  #gioi-thieu h2, #noi-bat h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    width: 45%; /* 2 card 1 hàng */
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  #banner img {
+    height: auto; /* tự co theo tỷ lệ */
+  }
+
+  #gioi-thieu > div {
+    gap: 20px;
+  }
+
+  .card {
+    width: 90%; /* 1 card 1 hàng */
+    margin: 0 auto 20px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+}

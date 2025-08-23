@@ -73,27 +73,66 @@ header {
   background: #d62828;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  header h1.nav-center {
-    margin: 10px 0;
-  }
 
-  .nav-left ul,
-  .nav-right ul {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-}
 
 .nav-right a.login-link {
   color: #cb1414 !important;
   font-weight: bold;
 }
 
+/* Mobile responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-bottom: 1px solid #d78aa2;
+  }
 
+  header h1.nav-center {
+    margin: 10px 0;
+    font-size: 22px;
+  }
+
+  .nav-left ul,
+  .nav-right ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    display: none; /* ẩn menu, hiện khi click hamburger */
+  }
+
+  .nav-left li,
+  .nav-right li {
+    width: 100%;
+  }
+
+  .nav-left a,
+  .nav-right a,
+  .nav-right button {
+    width: 100%;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  /* Hiện hamburger */
+  .hamburger {
+    display: block;
+  }
+}
+
+/* Media nhỏ hơn 480px (điện thoại nhỏ) */
+@media (max-width: 480px) {
+  header h1.nav-center {
+    font-size: 18px;
+  }
+
+  .nav-left a,
+  .nav-right a,
+  .nav-right button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}

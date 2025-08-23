@@ -17,17 +17,3 @@
 
 
 
- /* Mobile responsive */
-@media (max-width: 768px) {
-  .image-item img {
-    width: 45%;  /* mỗi ảnh chiếm gần nửa màn hình */
-    margin-bottom: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .image-item img {
-    width: 90%; /* gần full màn hình trên điện thoại nhỏ */
-    margin-bottom: 10px;
-  }
-}

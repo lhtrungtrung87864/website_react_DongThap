@@ -17,3 +17,18 @@
 
 
 
+/* Mobile: dưới 768px */
+@media (max-width: 768px) {
+  .image-slider {
+    flex-wrap: wrap;        /* Cho phép tự xuống hàng */
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .image-item img {
+    width: 60%;             /* hiển thị 2 ảnh mỗi hàng */
+    max-width: 180px;
+  }
+}
+
+

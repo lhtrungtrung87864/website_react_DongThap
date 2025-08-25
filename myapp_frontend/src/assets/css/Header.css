@@ -81,3 +81,39 @@ header {
   font-weight: bold;
 }
 
+
+@media (max-width: 768px) {
+  /* Xử lý dư khoảng trắng bên phải khi mobile */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* Ngăn cuộn ngang gây dư trắng */
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  width: 100%;
+}
+
+.nav-left,
+.nav-right {
+  width: 100%;  /* menu luôn chiếm hết ngang */
+}
+
+.nav-left ul,
+.nav-right ul {
+  margin: 0;    /* bỏ margin mặc định */
+  padding: 0;   /* bỏ padding mặc định */
+  width: 100%;
+}
+
+.nav-left li,
+.nav-right li {
+  width: 100%;
+}
+
+}

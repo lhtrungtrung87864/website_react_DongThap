@@ -5,7 +5,10 @@ import Footer from "../../component/Footer";
 import Marquee from "../../component/Marquee";
 import "../../assets/css/HomeUser.css";
 import Search from "../../component/Search";
-import newsData from "../../data/news.json";
+
+import Diadiemjson from "../../data/Diadiem.json"
+import Amthucjson from "../../data/Amthuc.json"
+
 import Sections from "../../data/sections.json";
 import ImagesDong from "../../component/ImagesDong";
 import DiaDiem from "../../data/Diadiem.json";
@@ -18,17 +21,36 @@ export default function HomeUser() {
   const [user, setUser] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
   // dữ liệu từ datanews.json
-  const [news] = useState(newsData);
+//  const [news] = useState(newsData);
+    const combinedData = [
+    
+    ...Diadiemjson.map((item) => ({ ...item, source: "diadiem" })),
+    ...Amthucjson.map((item) => ({ ...item, source: "amthuc" })),
+  ];
+
+
   const places = DiaDiem; // chứa cả img + link
 
   const [results, setResults] = useState([]);
 
+  // Xử lý tìm kiếm
   const handleSearch = (keyword) => {
-    const filtered = news.filter((item) =>
+    if (!keyword) {
+      setResults([]); // clear nếu không có từ khóa
+      return;
+    }
+    const filtered = combinedData.filter((item) =>
       item.title.toLowerCase().includes(keyword.toLowerCase())
     );
     setResults(filtered);
   };
+
+  // const handleSearch = (keyword) => {
+  //   const filtered = news.filter((item) =>
+  //     item.title.toLowerCase().includes(keyword.toLowerCase())
+  //   );
+  //   setResults(filtered);
+  // };
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -74,22 +96,27 @@ export default function HomeUser() {
         <section id="banner">
           <img src={Images} alt="Cảnh đẹp Đồng Tháp" className="banner-image" />
 
-          {/* Ô tìm kiếm */}
-          <Search news={news} onSearch={handleSearch} />
-          {/* Hiển thị kết quả tìm kiếm */}
-          {results.length > 0 && (
-            <div className="search-results">
-              <h3>Kết quả tìm kiếm:</h3>
-              <ul>
-                {results.map((r, idx) => (
-                  <li key={idx}>
-                    {/* render HTML trong chuỗi */}
-                    <span dangerouslySetInnerHTML={{ __html: r }} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div>
+      {/* Ô tìm kiếm */}
+      <Search combinedData={combinedData} onSearch={handleSearch} />
+
+
+      {/* Hiển thị kết quả */}
+      {results.length > 0 && (
+        <div className="search-results">
+          <h3>Kết quả tìm kiếm:</h3>
+          <ul>
+            {results.map((r, idx) => (
+              <li key={idx}>
+                <a href={r.link} target="_blank" rel="noopener noreferrer">
+                  {r.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
         </section>
 
         <h2 class="title_DT">Đồng Tháp – Đất Sen Hồng</h2>
@@ -120,9 +147,9 @@ export default function HomeUser() {
 
             <div className="news-list">
               <ul>
-                {news.map((item, index) => (
+                {combinedData.map((item, index) => (
                   <li key={index}>
-                    <a href={item.link}>{item.title}</a>
+                    <a href={item.link}>{item.title} - {item.description}</a>
                   </li>
                 ))}
               </ul>

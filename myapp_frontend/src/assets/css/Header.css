@@ -82,38 +82,95 @@ header {
 }
 
 
+/* ---------------- Desktop lớn: từ 1080px trở lên ---------------- */
+@media (min-width: 1080px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    overflow-x: hidden; 
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    width: 100%;        /* luôn full chiều ngang */
+    max-width: none;    /* bỏ giới hạn 1200px */
+    margin: 0;          /* bỏ căn giữa */
+  }
+
+  .nav-left,
+  .nav-right {
+    width: auto;         /* menu vừa nội dung */
+  }
+
+  .nav-left ul,
+  .nav-right ul {
+    display: flex;       /* menu ngang */
+    gap: 20px;
+  }
+
+  .nav-left li,
+  .nav-right li {
+    width: auto;
+  }
+}
+
+/* ---------------- Tablet & Mobile vừa: dưới 768px ---------------- */
 @media (max-width: 768px) {
-  /* Xử lý dư khoảng trắng bên phải khi mobile */
-* {
-  box-sizing: border-box;
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    width: 100%;
+    overflow-x: hidden; 
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    width: 100%;
+  }
+
+  .nav-left,
+  .nav-right {
+    width: 100%;  /* menu full width */
+  }
+
+  .nav-left ul,
+  .nav-right ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .nav-left li,
+  .nav-right li {
+    width: 100%;  /* menu dọc */
+    padding: 6px;
+  }
 }
 
-html, body {
-  width: 100%;
-  overflow-x: hidden; /* Ngăn cuộn ngang gây dư trắng */
-  margin: 0;
-  padding: 0;
+/* ---------------- Mobile nhỏ: dưới 480px ---------------- */
+@media (max-width: 480px) {
+  header {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .nav-left ul,
+  .nav-right ul {
+    display: block;   /* menu dọc hoàn toàn */
+    text-align: center;
+  }
+
+  .nav-left li,
+  .nav-right li {
+    display: block;
+    padding: 8px 0;
+  }
 }
 
-header {
-  width: 100%;
-}
-
-.nav-left,
-.nav-right {
-  width: 100%;  /* menu luôn chiếm hết ngang */
-}
-
-.nav-left ul,
-.nav-right ul {
-  margin: 0;    /* bỏ margin mặc định */
-  padding: 0;   /* bỏ padding mặc định */
-  width: 100%;
-}
-
-.nav-left li,
-.nav-right li {
-  width: 100%;
-}
-
-}

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../../assets/css/Gioithieus.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
-import newsData from "../../data/news.json";
 import Search from "../../component/Search";
+
+import Diadiemjson from "../../data/Diadiem.json"
+import Amthucjson from "../../data/Amthuc.json"
+
 import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 import ImageDong from "../../component/ImagesDong"
 
@@ -14,15 +18,27 @@ import Images from "../../assets/image/Dongthap.png";
 export default function GioiThieu() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-   const [results, setResults] = useState([]);
-     const [news] = useState(newsData);
-  
-    const handleSearch = (keyword) => {
-    const filtered = news.filter((item) =>
+
+ const combinedData = [
+    
+    ...Diadiemjson.map((item) => ({ ...item, source: "diadiem" })),
+    ...Amthucjson.map((item) => ({ ...item, source: "amthuc" })),
+  ];
+  const [results, setResults] = useState([]);
+
+    // Xử lý tìm kiếm
+  const handleSearch = (keyword) => {
+    if (!keyword) {
+      setResults([]); // clear nếu không có từ khóa
+      return;
+    }
+    const filtered = combinedData.filter((item) =>
       item.title.toLowerCase().includes(keyword.toLowerCase())
     );
     setResults(filtered);
   };
+
+  
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -41,6 +57,7 @@ export default function GioiThieu() {
     navigate("/"); // đưa về trang chủ sau khi logout
   };
 
+
   return (
     <div>
       <>
@@ -49,26 +66,30 @@ export default function GioiThieu() {
         <main>
           {/* Banner hình ảnh */}
           <section
-            id="banner"
-           
-          >
+            id="banner">
             <img src={Images} alt="Cảnh đẹp Đồng Tháp" />
-            {/* Ô tìm kiếm */}
-                      <Search news={news} onSearch={handleSearch} />
-                      {/* Hiển thị kết quả tìm kiếm */}
-                      {results.length > 0 && (
-                        <div className="search-results">
-                          <h3>Kết quả tìm kiếm:</h3>
-                          <ul>
-                            {results.map((r, idx) => (
-                              <li key={idx}>
-                                {/* render HTML trong chuỗi */}
-                                <span dangerouslySetInnerHTML={{ __html: r }} />
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+           
+            <div>
+                 {/* Ô tìm kiếm */}
+                 <Search combinedData={combinedData} onSearch={handleSearch} />
+           
+           
+                 {/* Hiển thị kết quả */}
+                 {results.length > 0 && (
+                   <div className="search-results">
+                     <h3>Kết quả tìm kiếm:</h3>
+                     <ul>
+                       {results.map((r, idx) => (
+                         <li key={idx}>
+                           <a href={r.link} target="_blank" rel="noopener noreferrer">
+                             {r.title}
+                           </a>
+                         </li>
+                       ))}
+                     </ul>
+                   </div>
+                 )}
+               </div>
           </section>
 
           {/* Giới thiệu ngắn gọn */}
@@ -246,28 +267,34 @@ export default function GioiThieu() {
             <h2>Các mục nổi bật</h2>
             <div>
               <div className="card">
+              <Link to="/dia-diem">
                 <img
                   src="https://dulichvietnam.com.vn/kinh-nghiem/wp-content/uploads/2019/04/kinh-nghiem-du-lich-vuon-quoc-gia-tram-chim-2-696x391.jpg"
                   alt="Du lịch"
                   className="animate-img"
                 />
-                <h3>Du lịch</h3>
-              </div>
-
+              </Link>
+              <h3>Du lịch</h3>
+            </div>
+           
               <div className="card">
+                 <Link to="/am-thuc">
                 <img
                   src="https://tuilanguoimientay.vn/wp-content/uploads/2022/06/nem-lai-vung-1-1.jpg"
                   alt="Đặc sản"
                   className="animate-img"
                 />
+                </Link>
                 <h3>Ẩm thực & Đặc sản</h3>
               </div>
               <div className="card">
+                <Link to="/van-hoa">
                 <img
                   src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/472188aEm/lang-chieu-dinh-yen-bi-mat-cua-ngoi-lang-nghe-100-tuoi_9"
                   alt="Văn hóa"
                   className="animate-img"
                 />
+                </Link>
                 <h3>Văn hóa & Lễ hội</h3>
               </div>
             </div>

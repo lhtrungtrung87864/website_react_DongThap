@@ -16,18 +16,44 @@
 }
 
 
+/* --------- Desktop lớn: từ 1080px trở lên --------- */
+@media (min-width: 1080px) {
+  .image-slider {
+    justify-content: center;
+    gap: 20px;
+  }
 
-/* Mobile: dưới 768px */
+  .image-item img {
+    width: 200px;    /* to hơn trên desktop */
+    max-width: 220px;
+  }
+}
+
+/* --------- Tablet & Mobile vừa: dưới 768px --------- */
 @media (max-width: 768px) {
   .image-slider {
-    flex-wrap: wrap;        /* Cho phép tự xuống hàng */
+    flex-wrap: wrap;        
     justify-content: center;
     gap: 15px;
   }
 
   .image-item img {
-    width: 60%;             /* hiển thị 2 ảnh mỗi hàng */
-    max-width: 180px;
+    width: 60%;     /* mỗi hàng 2 ảnh */
+    max-width: 200px;
+  }
+}
+
+/* --------- Mobile nhỏ: dưới 480px --------- */
+@media (max-width: 480px) {
+  .image-slider {
+    flex-direction: column;  /* xếp dọc */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .image-item img {
+    width: 70%;    /* 1 ảnh mỗi hàng */
+    max-width: 300px;
   }
 }
 

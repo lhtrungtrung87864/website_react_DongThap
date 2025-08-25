@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../assets/css/Search.css";
 
-export default function Search({ news, onSearch }) {
+export default function Search({ combinedData, onSearch }) {
   const [keyword, setKeyword] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -13,7 +13,7 @@ export default function Search({ news, onSearch }) {
     if (value.trim() === "") {
       setSuggestions([]);
     } else {
-      const filtered = news.filter((item) =>
+      const filtered = combinedData.filter((item) =>
         item.title.toLowerCase().includes(value.toLowerCase())
       );
       setSuggestions(filtered.slice(0, 5)); // giới hạn 5 gợi ý
@@ -49,7 +49,7 @@ export default function Search({ news, onSearch }) {
         <ul className="suggestions">
           {suggestions.map((s, idx) => (
             <li key={idx} onClick={() => handleSelect(s.title)}>
-              {s.title}
+              {s.title} - {s.description}
             </li>
           ))}
         </ul>

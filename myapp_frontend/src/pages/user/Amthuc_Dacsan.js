@@ -16,7 +16,7 @@ export default function Amthucs() {
 useEffect(() => {
   
   // lấy amthuc
-  fetch("/api/amthuc")
+  fetch(`${process.env.REACT_APP_API_URL}/api/amthuc`)
     .then((res) => res.json())
     .then((data) => setAmthuc(data))
     .catch((err) => console.error("Lỗi load amthuc:", err));

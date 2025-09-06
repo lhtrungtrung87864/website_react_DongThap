@@ -9,7 +9,7 @@ import DiaDiem from "./pages/user/Diadiem";
 import AmThuc from "./pages/user/Amthuc_Dacsan";
 import VanHoa from "./pages/user/Vanhoa_Lehoi";
 import LienHe from "./pages/user/Lienhe";
-import TinTuc from "./pages/user/Tintuc_Sukien";
+
 import LanghoaSadec from "./pages/user/DiaDiem_DuLich/Lang_Hoa_Sa_Dec";
 
 import PrivateRoute from "./component/PrivateRoute";
@@ -24,7 +24,7 @@ function App() {
         <Route path="/dia-diem/1" element={<LanghoaSadec />} />
         <Route path="/am-thuc" element={<AmThuc />} />
         <Route path="/van-hoa-le-hoi" element={<VanHoa />} />
-        <Route path="/tin-tuc-su-kien" element={<TinTuc />} />
+       
         <Route path="/lien-he" element={<LienHe />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

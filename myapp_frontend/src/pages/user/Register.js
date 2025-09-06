@@ -15,7 +15,7 @@ export default function Register() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("/api/auth")
+    fetch(`${process.env.REACT_APP_API_AUTH_URL}`)
       .then((res) => res.json())
       .then((data) => setUsers(data))
       .catch((err) => console.error(err));
@@ -62,7 +62,7 @@ export default function Register() {
     const newUser = { fullname ,username, password, role };
 
     try {
-      const res = await fetch("/api/auth", {
+      const res = await fetch(`${process.env.REACT_APP_API_AUTH_URL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),

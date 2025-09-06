@@ -18,7 +18,7 @@ export default function Login() {
 
     try {
       // Lấy danh sách user từ backend
-      const res = await fetch("/api/auth");
+      const res = await fetch(`${process.env.REACT_APP_API_AUTH_URL}`);
       const users = await res.json();
 
       // Kiểm tra username & password

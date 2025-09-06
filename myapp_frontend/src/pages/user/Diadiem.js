@@ -14,7 +14,7 @@ export default function DiaDiems() {
 
  
 useEffect(() => {
-  fetch("/api/diadiem")
+  fetch(`${process.env.REACT_APP_API_URL}/api/diadiem`)
     .then((res) => res.json())
     .then((data) => setPlaces(data))
     .catch((err) => console.error("Lỗi khi load địa điểm:", err));

@@ -2,47 +2,34 @@ import React, { useEffect, useState } from "react";
 import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import "../../assets/css/Diadiem.css";
-import DiaDiem from "../../data/Diadiem.json";
-import { useNavigate } from "react-router-dom";
-import ImagesDong from "../../component/ImagesDong"
-import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 
+import ImagesDong from "../../component/ImagesDong";
+import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 
 export default function DiaDiems() {
   
-
-  const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    if (loggedUser && loggedUser.role === "user") {
-      setUser(loggedUser);
-    } else {
-      setUser(null);
-    }
-  }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("loggedInUser");
-    setUser(null);
-    navigate("/");
-  };
-
-  
+  const [places, setPlaces] = useState([]); // ✅ state để lưu dữ liệu từ API
 
 
-  
+
+ 
+useEffect(() => {
+  fetch("/api/diadiem")
+    .then((res) => res.json())
+    .then((data) => setPlaces(data))
+    .catch((err) => console.error("Lỗi khi load địa điểm:", err));
+}, []);
+
+
   return (
     <div>
-      <Header user={user} handleLogout={handleLogout} />
+      <Header />
       <section id="dia-diem">
         <h2>Địa điểm du lịch</h2>
         <div className="dia-diem-container">
-          {DiaDiem.map((place) => (
+          {places.map((place) => (
             <a key={place.id} href={place.link} className="card">
               <img src={place.img} alt={place.title} />
-
               <div className="card-content">
                 <h3>{place.title}</h3>
                 <p>{place.description}</p>
@@ -51,7 +38,7 @@ export default function DiaDiems() {
           ))}
         </div>
       </section>
-       {/* ✅ Chat nổi góc phải */}
+      {/* ✅ Chat nổi góc phải */}
       <FloatinggeminiChat />
       <ImagesDong />
       <Footer />

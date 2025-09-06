@@ -6,27 +6,38 @@ import Header from "../../component/Header";
 import Footer from "../../component/Footer";
 import Search from "../../component/Search";
 
-import Diadiemjson from "../../data/Diadiem.json"
-import Amthucjson from "../../data/Amthuc.json"
-
 import FloatinggeminiChat from "../../component/FloatingGeminiChat";
-import ImageDong from "../../component/ImagesDong"
+import ImageDong from "../../component/ImagesDong";
 
 import Images from "../../assets/image/Dongthap.png";
-
 
 export default function GioiThieu() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [diadiem, setDiadiem] = useState([]);
+  const [amthuc, setAmthuc] = useState([]);
 
- const combinedData = [
-    
-    ...Diadiemjson.map((item) => ({ ...item, source: "diadiem" })),
-    ...Amthucjson.map((item) => ({ ...item, source: "amthuc" })),
-  ];
   const [results, setResults] = useState([]);
 
-    // Xử lý tìm kiếm
+  // Gọi API lấy dữ liệu
+  useEffect(() => {
+    fetch("/api/diadiem")
+      .then((res) => res.json())
+      .then((data) => setDiadiem(data))
+      .catch((err) => console.error("Lỗi load diadiem:", err));
+
+    fetch("/api/amthuc")
+      .then((res) => res.json())
+      .then((data) => setAmthuc(data))
+      .catch((err) => console.error("Lỗi load amthuc:", err));
+  }, []);
+
+  // Kết hợp dữ liệu
+  const combinedData = [
+    ...diadiem.map((item) => ({ ...item, source: "diadiem" })),
+    ...amthuc.map((item) => ({ ...item, source: "amthuc" })),
+  ];
+  // Xử lý tìm kiếm
   const handleSearch = (keyword) => {
     if (!keyword) {
       setResults([]); // clear nếu không có từ khóa
@@ -37,8 +48,6 @@ export default function GioiThieu() {
     );
     setResults(filtered);
   };
-
-  
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -57,7 +66,6 @@ export default function GioiThieu() {
     navigate("/"); // đưa về trang chủ sau khi logout
   };
 
-
   return (
     <div>
       <>
@@ -65,31 +73,33 @@ export default function GioiThieu() {
 
         <main>
           {/* Banner hình ảnh */}
-          <section
-            id="banner">
+          <section id="banner">
             <img src={Images} alt="Cảnh đẹp Đồng Tháp" />
-           
+
             <div>
-                 {/* Ô tìm kiếm */}
-                 <Search combinedData={combinedData} onSearch={handleSearch} />
-           
-           
-                 {/* Hiển thị kết quả */}
-                 {results.length > 0 && (
-                   <div className="search-results">
-                     <h3>Kết quả tìm kiếm:</h3>
-                     <ul>
-                       {results.map((r, idx) => (
-                         <li key={idx}>
-                           <a href={r.link} target="_blank" rel="noopener noreferrer">
-                             {r.title}
-                           </a>
-                         </li>
-                       ))}
-                     </ul>
-                   </div>
-                 )}
-               </div>
+              {/* Ô tìm kiếm */}
+              <Search combinedData={combinedData} onSearch={handleSearch} />
+
+              {/* Hiển thị kết quả */}
+              {results.length > 0 && (
+                <div className="search-results">
+                  <h3>Kết quả tìm kiếm:</h3>
+                  <ul>
+                    {results.map((r, idx) => (
+                      <li key={idx}>
+                        <a
+                          href={r.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {r.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </section>
 
           {/* Giới thiệu ngắn gọn */}
@@ -114,9 +124,9 @@ export default function GioiThieu() {
                 </p>
 
                 <p>
-                  <strong>Thành phố Cao Lãnh:</strong> Được
-                  thành lập vào năm 2007 và đạt đô thị loại II vào năm 2020.
-                  Thành phố có diện tích 107 km² và dân số khoảng 164.835 người.
+                  <strong>Thành phố Cao Lãnh:</strong> Được thành lập vào năm
+                  2007 và đạt đô thị loại II vào năm 2020. Thành phố có diện
+                  tích 107 km² và dân số khoảng 164.835 người.
                 </p>
 
                 <p>
@@ -197,7 +207,7 @@ export default function GioiThieu() {
                 <p>
                   <strong>Hành chính – Địa giới</strong>
                 </p>
-                
+
                 <p>
                   <strong>Ngày sáp nhập:</strong> 1/7/2025, theo Nghị quyết số
                   1663/NQ-UBTVQH15 của Ủy ban Thường vụ Quốc hội.
@@ -222,8 +232,9 @@ export default function GioiThieu() {
                 </p>
 
                 <p>
-                  <strong>Vận hành chính quyền địa phương:</strong> Từ ngày 1/7/2025, 
-                  chính quyền hai cấp tỉnh Đồng Tháp và Tiền Giang bắt đầu vận hành theo mô hình mới.
+                  <strong>Vận hành chính quyền địa phương:</strong> Từ ngày
+                  1/7/2025, chính quyền hai cấp tỉnh Đồng Tháp và Tiền Giang bắt
+                  đầu vận hành theo mô hình mới.
                 </p>
 
                 <p>
@@ -267,41 +278,41 @@ export default function GioiThieu() {
             <h2>Các mục nổi bật</h2>
             <div>
               <div className="card">
-              <Link to="/dia-diem">
-                <img
-                  src="https://dulichvietnam.com.vn/kinh-nghiem/wp-content/uploads/2019/04/kinh-nghiem-du-lich-vuon-quoc-gia-tram-chim-2-696x391.jpg"
-                  alt="Du lịch"
-                  className="animate-img"
-                />
-              </Link>
-              <h3>Du lịch</h3>
-            </div>
-           
+                <Link to="/dia-diem">
+                  <img
+                    src="https://dulichvietnam.com.vn/kinh-nghiem/wp-content/uploads/2019/04/kinh-nghiem-du-lich-vuon-quoc-gia-tram-chim-2-696x391.jpg"
+                    alt="Du lịch"
+                    className="animate-img"
+                  />
+                </Link>
+                <h3>Du lịch</h3>
+              </div>
+
               <div className="card">
-                 <Link to="/am-thuc">
-                <img
-                  src="https://tuilanguoimientay.vn/wp-content/uploads/2022/06/nem-lai-vung-1-1.jpg"
-                  alt="Đặc sản"
-                  className="animate-img"
-                />
+                <Link to="/am-thuc">
+                  <img
+                    src="https://tuilanguoimientay.vn/wp-content/uploads/2022/06/nem-lai-vung-1-1.jpg"
+                    alt="Đặc sản"
+                    className="animate-img"
+                  />
                 </Link>
                 <h3>Ẩm thực & Đặc sản</h3>
               </div>
               <div className="card">
                 <Link to="/van-hoa">
-                <img
-                  src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/472188aEm/lang-chieu-dinh-yen-bi-mat-cua-ngoi-lang-nghe-100-tuoi_9"
-                  alt="Văn hóa"
-                  className="animate-img"
-                />
+                  <img
+                    src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/472188aEm/lang-chieu-dinh-yen-bi-mat-cua-ngoi-lang-nghe-100-tuoi_9"
+                    alt="Văn hóa"
+                    className="animate-img"
+                  />
                 </Link>
                 <h3>Văn hóa & Lễ hội</h3>
               </div>
             </div>
           </section>
         </main>
- {/* ✅ Chat nổi góc phải */}
-      <FloatinggeminiChat />
+        {/* ✅ Chat nổi góc phải */}
+        <FloatinggeminiChat />
         <ImageDong />
         <Footer />
       </>

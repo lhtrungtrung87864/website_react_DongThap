@@ -2,7 +2,7 @@
   background: #2c3e50;
   color: white;
   padding: 10px 20px;
-   max-height: 300px; /* hoặc tuỳ ý */
+  max-height: 300px; /* hoặc tuỳ ý */
   overflow: hidden;   /* ẩn phần dư thừa */
  
 }
@@ -34,18 +34,16 @@
   padding: 0;
 }
 
-.footer-col ul li {
-  margin-bottom: 10px;
-}
+
 
 .footer-col ul li a {
   color: white;
-  text-decoration: none;
-   font-size: 14px; /* thay vì mặc định */
+  padding: 0px;
+  font-size: 14px; /* thay vì mặc định */
 }
 
 .footer-col ul li a:hover {
-  text-decoration: underline;
+  color: #f3672b;
 }
 
 .socials {

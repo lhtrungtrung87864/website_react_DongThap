@@ -6,12 +6,11 @@ import Marquee from "../../component/Marquee";
 import "../../assets/css/HomeUser.css";
 import Search from "../../component/Search";
 
-import Diadiemjson from "../../data/Diadiem.json"
-import Amthucjson from "../../data/Amthuc.json"
 
-import Sections from "../../data/sections.json";
+
+
 import ImagesDong from "../../component/ImagesDong";
-import DiaDiem from "../../data/Diadiem.json";
+
 import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 
 import Images from "../../assets/image/Dongthap.png";
@@ -20,16 +19,35 @@ export default function HomeUser() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
-  // dữ liệu từ datanews.json
-//  const [news] = useState(newsData);
-    const combinedData = [
-    
-    ...Diadiemjson.map((item) => ({ ...item, source: "diadiem" })),
-    ...Amthucjson.map((item) => ({ ...item, source: "amthuc" })),
-  ];
+  const [Diadiem, setDiadiem] = useState([]);
+  const [Amthuc, setAmthuc] = useState([]);
+  const [Sections, setSections] = useState([]);
 
+useEffect(() => {
+  // lấy diadiem
+  fetch("/api/diadiem")
+    .then((res) => res.json())
+    .then((data) => setDiadiem(data))
+    .catch((err) => console.error("Lỗi load diadiem:", err));
 
-  const places = DiaDiem; // chứa cả img + link
+  // lấy amthuc
+  fetch("/api/amthuc")
+    .then((res) => res.json())
+    .then((data) => setAmthuc(data))
+    .catch((err) => console.error("Lỗi load amthuc:", err));
+
+  // lay sections
+
+  fetch("api/sections")
+    .then((res) => res.json())
+    .then((data) => setSections(data))
+    .catch((err) => console.error("Lỗi load sections:", err));
+}, []);
+
+const combinedData = [
+  ...Diadiem.map((item) => ({ ...item, source: "diadiem" })),
+  ...Amthuc.map((item) => ({ ...item, source: "amthuc" })),
+];
 
   const [results, setResults] = useState([]);
 
@@ -45,12 +63,7 @@ export default function HomeUser() {
     setResults(filtered);
   };
 
-  // const handleSearch = (keyword) => {
-  //   const filtered = news.filter((item) =>
-  //     item.title.toLowerCase().includes(keyword.toLowerCase())
-  //   );
-  //   setResults(filtered);
-  // };
+  
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -70,21 +83,23 @@ export default function HomeUser() {
   // Tự động đổi ảnh
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % places.length);
+      setCurrentImage((prev) => (prev + 1) % combinedData.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [places.length]);
+  }, [combinedData.length]);
 
   const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % places.length);
+    setCurrentImage((prev) => (prev + 1) % combinedData.length);
   };
 
   const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + places.length) % places.length);
+    setCurrentImage(
+      (prev) => (prev - 1 + combinedData.length) % combinedData.length
+    );
   };
 
   const handleClick = () => {
-    navigate(places[currentImage].link);
+    navigate(combinedData[currentImage].link);
   };
 
   return (
@@ -97,26 +112,29 @@ export default function HomeUser() {
           <img src={Images} alt="Cảnh đẹp Đồng Tháp" className="banner-image" />
 
           <div>
-      {/* Ô tìm kiếm */}
-      <Search combinedData={combinedData} onSearch={handleSearch} />
+            {/* Ô tìm kiếm */}
+            <Search combinedData={combinedData} onSearch={handleSearch} />
 
-
-      {/* Hiển thị kết quả */}
-      {results.length > 0 && (
-        <div className="search-results">
-          <h3>Kết quả tìm kiếm:</h3>
-          <ul>
-            {results.map((r, idx) => (
-              <li key={idx}>
-                <a href={r.link} target="_blank" rel="noopener noreferrer">
-                  {r.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+            {/* Hiển thị kết quả */}
+            {results.length > 0 && (
+              <div className="search-results">
+                <h3>Kết quả tìm kiếm:</h3>
+                <ul>
+                  {results.map((r, idx) => (
+                    <li key={idx}>
+                      <a
+                        href={r.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {r.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </section>
 
         <h2 class="title_DT">Đồng Tháp – Đất Sen Hồng</h2>
@@ -128,14 +146,18 @@ export default function HomeUser() {
 
           <div className="content-wrapper">
             {/* Slideshow ảnh */}
+            
             <div className="slideshow">
-              <img
-                src={places[currentImage].img}
-                alt={places[currentImage].title}
+              {combinedData.length > 0 && (
+                <img
+                src={combinedData[currentImage].img}
+                alt={combinedData[currentImage].title}
                 className="slideshow-img"
-                onClick={() => handleClick(places[currentImage].link)}
+                onClick={() => handleClick(combinedData[currentImage].link)}
                 style={{ cursor: "pointer" }}
+                
               />
+              )}
 
               <button className="btn prev" onClick={prevImage}>
                 ❮
@@ -149,7 +171,9 @@ export default function HomeUser() {
               <ul>
                 {combinedData.map((item, index) => (
                   <li key={index}>
-                    <a href={item.link}>{item.title} - {item.description}</a>
+                    <a href={item.link}>
+                      {item.title} - {item.description}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -189,8 +213,8 @@ export default function HomeUser() {
             ))}
           </div>
         </main>
-         {/* ✅ Chat nổi góc phải */}
-              <FloatinggeminiChat />
+        {/* ✅ Chat nổi góc phải */}
+        <FloatinggeminiChat />
         {/* cuoi trang */}
         <ImagesDong />
 

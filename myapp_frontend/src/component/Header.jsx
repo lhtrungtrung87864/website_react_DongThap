@@ -1,9 +1,24 @@
-// import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/css/Header.css";
+import { Link } from "react-router-dom";
 
-function Header({ user, handleLogout }) {
+function Header() {
+  const [user, setUser] = useState(null);
+
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    
+  };
 
   return (
     <header>
@@ -32,8 +47,8 @@ function Header({ user, handleLogout }) {
             {" "}
             <Link to="/lien-he">Liên hệ</Link>
           </li>
-
-          
+          {/* Chỉ admin mới thấy link quản trị
+          {user?.role === "admin" && <Link to="/homeadmin">Quản trị</Link>} */}
         </ul>
       </nav>
 
@@ -42,7 +57,7 @@ function Header({ user, handleLogout }) {
           {user ? (
             <>
               <li>
-                <strong>Xin chào {user.name}</strong>
+                <strong>Xin chào {user.fullname}</strong>
               </li>
               <li>
                 <button onClick={handleLogout}>Đăng xuất</button>

@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; // nếu dùng react-router
-import "../assets/css/Marquee.css"
-
-import Diadiemjson from "../data/Diadiem.json"
-import Amthucjson from "../data/Amthuc.json"
-
-const combinedData = [
-    
-    ...Diadiemjson.map((item) => ({ ...item, source: "diadiem" })),
-    ...Amthucjson.map((item) => ({ ...item, source: "amthuc" })),
-  ];
+import "../assets/css/Marquee.css";
 
 export default function Marquee() {
+  const [diadiem, setDiadiem] = useState([]);
+  const [amthuc, setAmthuc] = useState([]);
+  useEffect(() => {
+    // lấy diadiem
+    fetch("/api/diadiem")
+      .then((res) => res.json())
+      .then((data) => setDiadiem(data))
+      .catch((err) => console.error("Lỗi load diadiem:", err));
+
+    // lấy amthuc
+    fetch("/api/amthuc")
+      .then((res) => res.json())
+      .then((data) => setAmthuc(data))
+      .catch((err) => console.error("Lỗi load amthuc:", err));
+  }, []);
+
+  const combinedData = [
+    ...diadiem.map((item) => ({ ...item, source: "diadiem" })),
+    ...amthuc.map((item) => ({ ...item, source: "amthuc" })),
+  ];
+
   return (
     <div className="marquee-container">
       <div className="marquee-track">

@@ -7,13 +7,13 @@ export default function Marquee() {
   const [amthuc, setAmthuc] = useState([]);
   useEffect(() => {
     // lấy diadiem
-    fetch("/api/diadiem")
+    fetch(`${process.env.REACT_APP_API_URL}/api/diadiem`)
       .then((res) => res.json())
       .then((data) => setDiadiem(data))
       .catch((err) => console.error("Lỗi load diadiem:", err));
 
     // lấy amthuc
-    fetch("/api/amthuc")
+    fetch(`${process.env.REACT_APP_API_URL}/api/amthuc`)
       .then((res) => res.json())
       .then((data) => setAmthuc(data))
       .catch((err) => console.error("Lỗi load amthuc:", err));

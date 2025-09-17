@@ -39,12 +39,9 @@ function Header() {
           <li>
             <Link to="/van-hoa-le-hoi">Văn hóa - Lễ hội</Link>
           </li>
+          
           <li>
-            {" "}
-            <Link to="/tin-tuc-su-kien">Tin tức - Sự kiện</Link>
-          </li>
-          <li>
-            {" "}
+           
             <Link to="/lien-he">Liên hệ</Link>
           </li>
           {/* Chỉ admin mới thấy link quản trị

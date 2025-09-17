@@ -8,17 +8,18 @@ import FloatinggeminiChat from "../../component/FloatingGeminiChat";
 
 export default function DiaDiems() {
   
-  const [places, setPlaces] = useState([]); // ✅ state để lưu dữ liệu từ API
+  const [diadiem, setDiadiem] = useState([]); // ✅ state để lưu dữ liệu từ API
 
 
 
  
 useEffect(() => {
-  fetch(`${process.env.REACT_APP_API_URL}/api/diadiem`)
-    .then((res) => res.json())
-    .then((data) => setPlaces(data))
-    .catch((err) => console.error("Lỗi khi load địa điểm:", err));
-}, []);
+    // lấy diadiem
+    fetch(`${process.env.REACT_APP_URL_DD}`)
+      .then((res) => res.json())
+      .then((data) => setDiadiem(data))
+      .catch((err) => console.error("Lỗi load diadiem:", err));
+  }, []);
 
 
   return (
@@ -27,12 +28,12 @@ useEffect(() => {
       <section id="dia-diem">
         <h2>Địa điểm du lịch</h2>
         <div className="dia-diem-container">
-          {places.map((place) => (
-            <a key={place.id} href={place.link} className="card">
-              <img src={place.img} alt={place.title} />
+          {diadiem.map((item) => (
+            <a key={item.id} href={item.link} className="card">
+              <img src={item.img} alt={item.title} />
               <div className="card-content">
-                <h3>{place.title}</h3>
-                <p>{place.description}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
               </div>
             </a>
           ))}

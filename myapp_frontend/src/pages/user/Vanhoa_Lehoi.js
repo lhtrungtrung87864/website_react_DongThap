@@ -16,7 +16,7 @@ export default function VanhoaLehoi() {
 useEffect(() => {
   
   // lấy amthuc
-  fetch(`${process.env.REACT_APP_API_URL}/api/vanhoa`)
+  fetch(`${process.env.REACT_APP_URL_VH}`)
     .then((res) => res.json())
     .then((data) => setVanhoa(data))
     .catch((err) => console.error("Lỗi load amthuc:", err));

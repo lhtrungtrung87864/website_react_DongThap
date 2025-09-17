@@ -24,21 +24,21 @@ export default function HomeUser() {
   const [Sections, setSections] = useState([]);
 
 useEffect(() => {
-  // lấy diadiem
-  fetch(`${process.env.REACT_APP_API_URL}/api/diadiem`)
-    .then((res) => res.json())
-    .then((data) => setDiadiem(data))
-    .catch((err) => console.error("Lỗi load diadiem:", err));
+    // lấy diadiem
+    fetch(`${process.env.REACT_APP_URL_DD}`)
+      .then((res) => res.json())
+      .then((data) => setDiadiem(data))
+      .catch((err) => console.error("Lỗi load diadiem:", err));
 
-  // lấy amthuc
-  fetch(`${process.env.REACT_APP_API_URL}/api/amthuc`)
-    .then((res) => res.json())
-    .then((data) => setAmthuc(data))
-    .catch((err) => console.error("Lỗi load amthuc:", err));
-
+    // lấy amthuc
+    fetch(`${process.env.REACT_APP_URL_AT}`)
+      .then((res) => res.json())
+      .then((data) => setAmthuc(data))
+      .catch((err) => console.error("Lỗi load amthuc:", err));
+ 
   // lay sections
 
-  fetch(`${process.env.REACT_APP_API_URL}api/sections`)
+  fetch(`${process.env.REACT_APP_URL_SS}`)
     .then((res) => res.json())
     .then((data) => setSections(data))
     .catch((err) => console.error("Lỗi load sections:", err));

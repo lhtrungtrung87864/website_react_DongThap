@@ -14,13 +14,12 @@ export default function Amthucs() {
   const [amthuc, setAmthuc] = useState([]);
 
 useEffect(() => {
-  
-  // lấy amthuc
-  fetch(`${process.env.REACT_APP_API_URL}/api/amthuc`)
-    .then((res) => res.json())
-    .then((data) => setAmthuc(data))
-    .catch((err) => console.error("Lỗi load amthuc:", err));
-}, []);
+
+    fetch(`${process.env.REACT_APP_URL_AT}`)
+      .then((res) => res.json())
+      .then((data) => setAmthuc(data))
+      .catch((err) => console.error("Lỗi load amthuc:", err));
+  }, []);
 
 
   

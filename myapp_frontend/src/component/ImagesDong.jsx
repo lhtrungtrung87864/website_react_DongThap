@@ -18,13 +18,13 @@ export default function Main() {
 
   useEffect(() => {
     // lấy diadiem
-    fetch(`${process.env.REACT_APP_API_URL}/api/diadiem`)
+    fetch(`${process.env.REACT_APP_URL_DD}`)
       .then((res) => res.json())
       .then((data) => setDiadiem(data))
       .catch((err) => console.error("Lỗi load diadiem:", err));
 
     // lấy amthuc
-    fetch(`${process.env.REACT_APP_API_URL}/api/amthuc`)
+    fetch(`${process.env.REACT_APP_URL_AT}`)
       .then((res) => res.json())
       .then((data) => setAmthuc(data))
       .catch((err) => console.error("Lỗi load amthuc:", err));

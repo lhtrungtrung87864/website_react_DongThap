@@ -8,45 +8,42 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    
- 
-
     try {
-      // Lấy danh sách user từ backend
-      const res = await fetch(`${process.env.REACT_APP_API_AUTH_URL}`);
-      const users = await res.json();
-
-      // Kiểm tra username & password
-      const user = users.find(
-        (u) => u.username === username && u.password === password
+      const res = await fetch(
+        `${process.env.REACT_APP_AUTH_URL_LOGIN}`, 
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
       );
 
-      if (user) {
-        alert(`Đăng nhập thành công! Chào ${user.fullname}`);
-
-        const userSafe = {
-          username: user.username,
-          fullname: user.fullname,
-          role: user.role,
-        };
-
-        localStorage.setItem("user", JSON.stringify(userSafe));
-
-        if (user.role === "admin") {
-          navigate("/homeadmin");
-        } else {
-          navigate("/");
-        }
-      } else {
+      if (!res.ok) {
         alert("Sai username hoặc password");
+        return;
+      }
+
+      const data = await res.json();
+      const { token, user } = data;
+
+      // ✅ Lưu vào localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      alert(`Đăng nhập thành công! Chào ${user.fullname}`);
+
+      // ✅ Điều hướng theo role
+      if (user.role === "admin") {
+        navigate("/homeadmin");
+      } else {
+        navigate("/");
       }
     } catch (err) {
-      console.error(err);
+      console.error("Lỗi đăng nhập:", err);
       alert("Đăng nhập thất bại, vui lòng thử lại");
     } finally {
       setLoading(false);

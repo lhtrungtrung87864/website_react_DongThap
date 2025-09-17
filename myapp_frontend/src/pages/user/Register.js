@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../assets/css/Auth.css";
 
@@ -12,16 +12,8 @@ export default function Register() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_AUTH_URL}`)
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-      .catch((err) => console.error(err));
-  }, []);
-
-  // Password strength checker
+  // ✅ Password strength checker
   const getPasswordStrength = (password) => {
     if (password.length === 0) return null;
     if (password.length < 6) return "weak";
@@ -36,18 +28,9 @@ export default function Register() {
   const passwordsMatch =
     password && confirmPassword && password === confirmPassword;
 
+  // ✅ Submit Register
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    if (!Array.isArray(users)) {
-      alert("Backend trả về dữ liệu không hợp lệ");
-      return;
-    }
-
-    if (users.find((u) => u.username === username)) {
-      alert("Tài khoản đã tồn tại");
-      return;
-    }
 
     if (password !== confirmPassword) {
       alert("Mật khẩu xác nhận không khớp");
@@ -59,25 +42,29 @@ export default function Register() {
       return;
     }
 
-    const newUser = { fullname ,username, password, role };
+    const newUser = { fullname, username, password, role };
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_AUTH_URL}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_AUTH_URL_REGISTER}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newUser),
+        }
+      );
 
       const data = await res.json();
+
       if (res.ok) {
-        alert("Đăng ký thành công");
+        alert("Đăng ký thành công, mời đăng nhập!");
         navigate("/login");
       } else {
-        alert(data.error);
+        alert(data.error || "Đăng ký thất bại");
       }
     } catch (err) {
       console.error(err);
-      alert("Đăng ký thất bại");
+      alert("Có lỗi khi đăng ký");
     }
   };
 
@@ -137,7 +124,7 @@ export default function Register() {
             </button>
           </div>
 
-          {/* Password Strength Indicator */}
+          {/* Strength indicator */}
           {password && (
             <>
               <div className="password-strength">
@@ -163,21 +150,26 @@ export default function Register() {
             <button
               type="button"
               className="password-toggle"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              title={showConfirmPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+              onClick={() =>
+                setShowConfirmPassword(!showConfirmPassword)
+              }
+              title={
+                showConfirmPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"
+              }
             >
               {showConfirmPassword ? "🙈" : "👁️"}
             </button>
           </div>
 
-          {/* Confirm Password Status */}
           {confirmPassword && (
             <div
               className={`confirm-password-status ${
                 passwordsMatch ? "match" : "no-match"
               }`}
             >
-              {passwordsMatch ? "✓ Mật khẩu khớp" : "✗ Mật khẩu không khớp"}
+              {passwordsMatch
+                ? "✓ Mật khẩu khớp"
+                : "✗ Mật khẩu không khớp"}
             </div>
           )}
 

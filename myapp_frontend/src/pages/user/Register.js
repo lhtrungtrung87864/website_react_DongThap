@@ -7,7 +7,6 @@ export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role] = useState("user");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -42,7 +41,8 @@ export default function Register() {
       return;
     }
 
-    const newUser = { fullname, username, password, role };
+    // chỉ gửi fullname, username, password (khớp server)
+    const newUser = { fullname, username, password };
 
     try {
       const res = await fetch(

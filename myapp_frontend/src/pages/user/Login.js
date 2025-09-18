@@ -13,35 +13,29 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_AUTH_URL_LOGIN}`, 
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_AUTH_URL_LOGIN}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
 
       if (!res.ok) {
-        alert("Sai username hoặc password");
+        alert(data.error || "Sai username hoặc password");
         return;
       }
 
-      const data = await res.json();
       const { token, user } = data;
 
-      // ✅ Lưu vào localStorage
+      // ✅ Lưu token + user
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
       alert(`Đăng nhập thành công! Chào ${user.fullname}`);
 
       // ✅ Điều hướng theo role
-      if (user.role === "admin") {
-        navigate("/homeadmin");
-      } else {
-        navigate("/");
-      }
+      navigate(user.role === "admin" ? "/homeadmin" : "/");
     } catch (err) {
       console.error("Lỗi đăng nhập:", err);
       alert("Đăng nhập thất bại, vui lòng thử lại");

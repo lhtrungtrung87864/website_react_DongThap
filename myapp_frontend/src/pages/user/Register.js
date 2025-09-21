@@ -45,14 +45,11 @@ export default function Register() {
     const newUser = { fullname, username, password };
 
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_AUTH_URL_REGISTER}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newUser),
-        }
-      );
+      const res = await fetch(`${process.env.REACT_APP_AUTH_URL_REGISTER}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUser),
+      });
 
       const data = await res.json();
 
@@ -150,12 +147,8 @@ export default function Register() {
             <button
               type="button"
               className="password-toggle"
-              onClick={() =>
-                setShowConfirmPassword(!showConfirmPassword)
-              }
-              title={
-                showConfirmPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"
-              }
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              title={showConfirmPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
             >
               {showConfirmPassword ? "🙈" : "👁️"}
             </button>
@@ -167,9 +160,7 @@ export default function Register() {
                 passwordsMatch ? "match" : "no-match"
               }`}
             >
-              {passwordsMatch
-                ? "✓ Mật khẩu khớp"
-                : "✗ Mật khẩu không khớp"}
+              {passwordsMatch ? "✓ Mật khẩu khớp" : "✗ Mật khẩu không khớp"}
             </div>
           )}
 

@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/website_react_DongThap/static/css/main.689c0d13.css",
+    "main.js": "/website_react_DongThap/static/js/main.0a864d8d.js",
+    "static/js/453.8d2439b7.chunk.js": "/website_react_DongThap/static/js/453.8d2439b7.chunk.js",
+    "static/media/Dongthap.png": "/website_react_DongThap/static/media/Dongthap.1654be6291f409390fd8.png",
+    "index.html": "/website_react_DongThap/index.html",
+    "main.689c0d13.css.map": "/website_react_DongThap/static/css/main.689c0d13.css.map",
+    "main.0a864d8d.js.map": "/website_react_DongThap/static/js/main.0a864d8d.js.map",
+    "453.8d2439b7.chunk.js.map": "/website_react_DongThap/static/js/453.8d2439b7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.689c0d13.css",
+    "static/js/main.0a864d8d.js"
+  ]
+}
